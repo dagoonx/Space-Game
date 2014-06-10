@@ -1,7 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Test Assets\Scipts\Interaction.js">
     <Files>
+      <File FileName="Assets\Test Assets\Scipts\Interaction.js" Line="72" Column="70" />
       <File FileName="Assets\Test Assets\Scipts\Interaction.js" Line="32" Column="43" />
       <File FileName="Assets\Test Assets\Scipts\butt.js" Line="28" Column="2" />
     </Files>
