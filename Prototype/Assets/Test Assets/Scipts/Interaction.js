@@ -163,7 +163,8 @@ function projectObject()
 		}
 		else //if (hit.collider.tag != "emptySnapPar")
 		{	
-			
+			clone.transform.parent = null;
+			GameObject.Destroy(snapPar);	
 			clone.transform.position = hit.point + (hit.normal * .25f);
 			clone.transform.rotation = Quaternion.LookRotation(hit.normal);			
 				
@@ -173,7 +174,7 @@ function projectObject()
 	else 
 	{
 		
-		GameObject.Destroy(snapPar);			
+					
 		GameObject.Destroy(clone);			
 		canSpawn = true;
 		canPlace = false;
