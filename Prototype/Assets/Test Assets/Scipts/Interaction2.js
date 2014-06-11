@@ -126,46 +126,57 @@ function projectObject()
 {
 	if (shootRay())
 	{
-		instCloneObj();		
-		clone.layer = 2;
-		clone.renderer.material.shader = Shader.Find("Transparent/Diffuse");
-		clone.renderer.material.color.a = 0.5f;
-		clone.collider.enabled = false;
+		
+		
+			
 				
 		if (hit.collider.tag == "snapPoints")
-		{
-			canPlace = true;
-			if (Input.GetMouseButtonDown(0))
-			{
-				placeObject();
-			}
+		{	
+					
 			if (snapPar == null)
 			{
-				snapPar = new GameObject("emptySnapPar");				
-				snapPar.transform.position = clone.transform.Find("snapPoints").transform.Find("snapPoint0").transform.position + new Vector3(0, 0, 0);
-				snapPar.transform.rotation = clone.transform.Find("snapPoints").transform.Find("snapPoint0").transform.localRotation;								
-				clone.transform.parent = snapPar.transform;					
+				instCloneObj();		
+				clone.layer = 2;
+				clone.renderer.material.shader = Shader.Find("Transparent/Diffuse");
+				clone.renderer.material.color.a = 0.5f;
+				clone.collider.enabled = false;
+				snapPar = GameObject("emptySnapPar");				
+				snapPar.transform.position = clone.transform.Find("snapPoints").transform.Find("snapPoint0").transform.position - Vector3(0, .5,0);
+				snapPar.transform.rotation = clone.transform.Find("snapPoints").transform.Find("snapPoint0").transform.rotation; 									
+				clone.transform.parent = snapPar.transform;
+				
+				
+						
 			
 			}			
 			else if (snapPar != null)
 			{	
-				//snapPar.transform.position = hit.collider.transform.position;
-				snapPar.transform.position = hit.collider.transform.position + new Vector3 (0,0,0);
-				snapPar.transform.rotation = hit.collider.transform.localRotation;
+				snapPar.transform.position = hit.collider.transform.position;
+				snapPar.transform.rotation = hit.collider.transform.rotation;
+				
+				//snapPar.transform.position = hit.collider.transform.localPosition;
+				//snapPar.transform.position = hit.collider.transform.position + Vector3 (0,0,0);
+				//snapPar.transform.rotation = hit.collider.transform.localRotation * (Quaternion.Inverse(hit.collider.transform.localRotation));
+				//snapPar.transform.rotation = hit.collider.transform.localRotat	
 			}
 			
 			else
 			{
 				
-				//snapPar.transform.position = hit.transform.position;
-				//snapPar.transform.rotation = hit.transform.rotation;				 
+							 
 					
 			}			
 					
 							
 		}
 		else //if (hit.collider.tag != "emptySnapPar")
-		{	
+		{
+			canPlace = false;
+			clone.transform.parent = null;
+			GameObject.Destroy(snapPar);
+			snapPar = null;
+			clone.transform.position = hit.point + (hit.normal * .25f);
+			clone.transform.rotation = Quaternion.LookRotation(hit.normal);	
 					
 				
 		}	
@@ -174,16 +185,17 @@ function projectObject()
 	else 
 	{
 		
-					
+		
+		GameObject.Destroy(snapPar);
+		snapPar = null;			
 		GameObject.Destroy(clone);			
 		canSpawn = true;
-		canPlace = false;
 		
-		clone.transform.parent = null;
-		GameObject.Destroy(snapPar);
-		snapPar = null;	
-		clone.transform.position = hit.point + (hit.normal * .25f);
-		clone.transform.rotation = Quaternion.LookRotation(hit.normal);	
+		
+		
+		
+		
+		
 		
 	}		
 }

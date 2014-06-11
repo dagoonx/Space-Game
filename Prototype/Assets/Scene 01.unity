@@ -308,7 +308,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: .0500000007
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -323,7 +323,7 @@ GameObject:
   - 4: {fileID: 410592025}
   - 65: {fileID: 410592026}
   m_Layer: 0
-  m_Name: snapPoints3
+  m_Name: snapPoint3
   m_TagString: snapPoints
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -335,8 +335,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 410592024}
-  m_LocalRotation: {x: 1, y: 0, z: 0, w: -4.37113883e-08}
-  m_LocalPosition: {x: -0, y: -.5, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: -4.37113883e-08}
+  m_LocalPosition: {x: -0, y: .5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1970117122}
@@ -653,7 +653,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 577492627}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a28ba3c30242e745bcd2d217cdc37b6, type: 3}
+  m_Script: {fileID: 11500000, guid: 5da005768e572344cabb5842cf6db99d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   handsFull: 0
@@ -673,7 +673,7 @@ GameObject:
   - 4: {fileID: 654405519}
   - 65: {fileID: 654405520}
   m_Layer: 0
-  m_Name: snapPoints1
+  m_Name: snapPoint1
   m_TagString: snapPoints
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -686,7 +686,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 654405518}
   m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: -0, y: -0, z: -.5}
+  m_LocalPosition: {x: -0, y: -0, z: .5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1970117122}
@@ -712,7 +712,7 @@ GameObject:
   - 4: {fileID: 790143483}
   - 65: {fileID: 790143484}
   m_Layer: 0
-  m_Name: snapPoints5
+  m_Name: snapPoint5
   m_TagString: snapPoints
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -725,7 +725,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 790143482}
   m_LocalRotation: {x: 0, y: 0, z: .707106829, w: .707106829}
-  m_LocalPosition: {x: -.5, y: -0, z: 0}
+  m_LocalPosition: {x: .5, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1970117122}
@@ -751,7 +751,7 @@ GameObject:
   - 4: {fileID: 828387621}
   - 65: {fileID: 828387620}
   m_Layer: 0
-  m_Name: snapPoints0
+  m_Name: snapPoint0
   m_TagString: snapPoints
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -776,7 +776,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 828387619}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: 0, z: .5}
+  m_LocalPosition: {x: 0, y: 0, z: -.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1970117122}
@@ -1060,7 +1060,7 @@ GameObject:
   - 4: {fileID: 1619289960}
   - 65: {fileID: 1619289961}
   m_Layer: 0
-  m_Name: snapPoints2
+  m_Name: snapPoint2
   m_TagString: snapPoints
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1073,7 +1073,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1619289959}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: .5, z: 0}
+  m_LocalPosition: {x: -0, y: -.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1970117122}
@@ -1131,7 +1131,7 @@ GameObject:
   - 4: {fileID: 1977110994}
   - 65: {fileID: 1977110993}
   m_Layer: 0
-  m_Name: snapPoints4
+  m_Name: snapPoint4
   m_TagString: snapPoints
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1156,7 +1156,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1977110992}
   m_LocalRotation: {x: 0, y: 0, z: .707106829, w: -.707106829}
-  m_LocalPosition: {x: .5, y: -0, z: 0}
+  m_LocalPosition: {x: -.5, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1970117122}
@@ -1171,7 +1171,7 @@ GameObject:
   - 33: {fileID: 2044518594}
   - 64: {fileID: 2044518593}
   - 23: {fileID: 2044518592}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}

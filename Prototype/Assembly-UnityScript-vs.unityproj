@@ -48,6 +48,8 @@
   <ItemGroup>
      <Compile Include="Assets\Sample Assets\Utility\TimedObjectDestructor.js" />
      <Compile Include="Assets\Test Assets\Scipts\Interaction.js" />
+     <Compile Include="Assets\Test Assets\Scipts\Interaction2.js" />
+     <Compile Include="Assets\Test Assets\Scipts\Interaction3.js" />
      <Compile Include="Assets\Test Assets\Scipts\butt.js" />
      <None Include="Assets\Sample Assets\Effects\Light Shafts\Shaders\SamplePositions.shader" />
      <None Include="Assets\Sample Assets\Effects\Light Shafts\Shaders\Shared.cginc" />
