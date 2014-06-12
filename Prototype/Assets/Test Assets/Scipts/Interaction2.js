@@ -83,7 +83,7 @@ function instCloneObj()
 {
 	if (canSpawn == true)
 	{		 
-		clone = Instantiate(objToHold.gameObject, hit.point + (hit.normal * .25f), (Quaternion.LookRotation(hit.normal)));
+		clone = Instantiate(objToHold.gameObject, hit.collider.transform.position, hit.collider.transform.localRotation);
 		canSpawn = false;
 	}
 	
@@ -141,9 +141,12 @@ function projectObject()
 				clone.renderer.material.color.a = 0.5f;
 				clone.collider.enabled = false;
 				snapPar = GameObject("emptySnapPar");				
-				snapPar.transform.position = clone.transform.Find("snapPoints").transform.Find("snapPoint0").transform.position - Vector3(0, .5,0);
-				snapPar.transform.rotation = clone.transform.Find("snapPoints").transform.Find("snapPoint0").transform.rotation; 									
+				snapPar.transform.position = clone.transform.Find("snapPoints").transform.Find("snapPoint0").transform.position;
+				snapPar.transform.rotation = clone.transform.Find("snapPoints").transform.Find("snapPoint0").transform.rotation;
+				
 				clone.transform.parent = snapPar.transform;
+				snapPar.transform.position = hit.collider.transform.position;
+				snapPar.transform.rotation = hit.collider.transform.rotation;
 				
 				
 						
@@ -175,8 +178,8 @@ function projectObject()
 			clone.transform.parent = null;
 			GameObject.Destroy(snapPar);
 			snapPar = null;
-			clone.transform.position = hit.point + (hit.normal * .25f);
-			clone.transform.rotation = Quaternion.LookRotation(hit.normal);	
+			//clone.transform.position = hit.point + (hit.normal * .25f);
+			//clone.transform.rotation = Quaternion.LookRotation(hit.normal);	
 					
 				
 		}	
