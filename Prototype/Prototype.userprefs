@@ -1,10 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Test Assets\Scipts\Interaction2.js">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Test Assets\Scipts\Interaction.js">
     <Files>
       <File FileName="Assets\Test Assets\Scipts\Interaction.js" Line="1" Column="1" />
       <File FileName="Assets\Test Assets\Scipts\butt.js" Line="1" Column="1" />
-      <File FileName="Assets\Test Assets\Scipts\Interaction2.js" Line="142" Column="36" />
+      <File FileName="Assets\Test Assets\Scipts\Interaction2.js" Line="158" Column="65" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
