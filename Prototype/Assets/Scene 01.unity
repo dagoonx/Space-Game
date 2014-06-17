@@ -86,6 +86,7 @@ GameObject:
   - 114: {fileID: 92241501}
   - 114: {fileID: 92241500}
   - 114: {fileID: 92241499}
+  - 114: {fileID: 92241503}
   m_Layer: 0
   m_Name: First Person Controller
   m_TagString: Untagged
@@ -209,6 +210,17 @@ CharacterController:
   m_SkinWidth: .0500000007
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &92241503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 92241497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb937200272a695408f37164e1a6aa62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &229138905
 GameObject:
   m_ObjectHideFlags: 0
@@ -653,16 +665,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 577492627}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5da005768e572344cabb5842cf6db99d, type: 3}
+  m_Script: {fileID: 11500000, guid: 14ec81bd677ab88409cfb7a1ae276fce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handsFull: 0
-  objToHold: {fileID: 0}
-  hands: {fileID: 0}
-  canSpawn: 1
-  clone: {fileID: 0}
-  canPlace: 0
-  snapPar: {fileID: 0}
 --- !u!1 &654405518
 GameObject:
   m_ObjectHideFlags: 0
