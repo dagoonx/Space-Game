@@ -556,14 +556,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a28ba3c30242e745bcd2d217cdc37b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handsFull: 0
-  objToHold: {fileID: 0}
-  hands: {fileID: 0}
-  canProj: 1
-  canPlace: 0
-  canSpawn: 0
-  emptyPar: {fileID: 0}
-  clone: {fileID: 0}
+  cj: {fileID: 0}
+  objInHand: {fileID: 0}
 --- !u!114 &92241504
 MonoBehaviour:
   m_ObjectHideFlags: 0
