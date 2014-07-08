@@ -18,8 +18,8 @@ function Update () {
 }
 
 function shootRay() : boolean {
-	var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-	return Physics.Raycast(ray, hit, 10);
+	var cam : Transform = Camera.main.transform;
+	return Physics.Raycast(cam.position, cam.forward, hit, 10);
 }
 
 function pickUp() {
