@@ -1,208 +1,60 @@
 ﻿#pragma strict
 
-var handsFull : boolean  = false;//checks to see if hands have an object asighed to them
-var objToHold : GameObject; // the object you are goign to be picking up
-var hands : GameObject; // the empty that is your hands 
-var hit : RaycastHit; // raycast hit veriable
-var canProj : boolean = true;//checks to see if you can spawn a "ghost" of what you are holding
-var canPlace : boolean = false;
-var canSpawn : boolean = false;
-var emptyPar : GameObject;
-var clone : GameObject; //the "ghost" image before you place
-
-
-/*class Frame extends ScriptableObject {
-	var left : Frame;
-	var right : Frame;
-	var snapPoint : Collider;
-	var transform : Transform;
-	var rigidbody : Rigidbody;
-	function Frame(left : GameObject) {
-		var buddy : GameObject = left;
-		this.left = null;
-		buddy.transform.parent = this.transform;
-		buddy.rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-		this.transform.position = left.transform.position;
-		this.rigidbody.mass = left.rigidbody.mass;
-		this.right = null;
-		this.snapPoint = null;
-	}
-	function Frame(left : Frame, right : Frame, snapPoint : Collider) {
-		this.left = left;
-		this.right = right;
-		this.snapPoint = snapPoint;
-		this.transform.position = (left.transform.position * left.rigidbody.mass
-								   + right.transform.position * right.rigidbody.mass) / 2;
-		this.rigidbody.mass = left.rigidbody.mass + right.rigidbody.mass;
-		this.left.rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-		this.right.rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-		this.left.transform.parent = this.transform;
-		this.right.transform.parent = this.transform;
-	}
-}*/
+var cj : CharacterJoint = null;
+var objInHand : Transform = null;
 
 function Start() {
-	hands = this.transform.FindChild("Hands").gameObject;
 }
 
-function Update () {
-	
-	//if you press "E"
-	var rayhit : boolean = shootRay();
-	if (Input.GetKeyDown(KeyCode.E)){
-		if (handsFull == true){
-			dropObject();
-			return;
-		}
-		if (rayhit) {
-			if (hit.transform.tag == "physTest") {
-				pickUpObject();	
-			}
-		} else {
-			Debug.Log("you hit nothing");
-		}						
-	}
-	if (handsFull && rayhit && hit.collider.tag == "snapPoints") {
-		if (Input.GetMouseButtonDown(0)) {
-			canPlace = true;
-			
-			//GameObject.Destroy(clone);
-			placeObject();
-			//new Frame(Frame(objToHold), Frame(hit.transform.gameObject), hit.collider);
-			//dropObject();
-		} else {
-			GameObject.Destroy(clone);
-			projectObject();
-		}
-	} else if (clone) {
-		GameObject.Destroy(clone);
-	}
-}
-// 
-function setLayer(obj : GameObject, layer : int) {
-	obj.layer = layer;	
-	for (var child : Transform in obj.transform.FindChild("snapPoints").transform){
-		child.gameObject.layer = layer;
-	}
+function setMouseLook(state : boolean) {
+	GetComponent(MouseLook).enabled = state;
+	Camera.main.GetComponent(MouseLook).enabled = state;
 }
 
-//function to pick things up
-function pickUpObject(){
-	objToHold = hit.transform.gameObject;				
-	objToHold.transform.parent = hands.transform;
-	objToHold.transform.rotation = hands.transform.rotation;
-	objToHold.transform.position = hands.transform.position;
-	objToHold.collider.enabled = false;
-	handsFull = true;	
-	objToHold.rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-	setLayer(objToHold, 2);
-}
-//function to drop things
-function dropObject(){
-	objToHold.transform.parent = null;
-	objToHold.rigidbody.constraints = RigidbodyConstraints.None;
-	objToHold.collider.enabled = true;
-	canProj = true;
-	handsFull = false;
-	setLayer(objToHold, 0);
-	objToHold = null;
-}
-
-
-function placeObject(){
-	
-	if (canPlace == true)
-	{
-	
-		if (emptyPar == null)//creates parent if there is none
-		{
-			Debug.Log("poop");
-			clone.transform.parent = null;		
-			GameObject.Destroy(clone);
-			
-			objToHold.transform.parent = null;
-			objToHold.transform.position = clone.transform.position;
-			objToHold.transform.rotation = clone.transform.rotation;
-			objToHold.layer = 0;
-			objToHold.collider.enabled = true;
-						
-			canPlace = false;
-			canSpawn = true;
-			handsFull = false;
-			canProj = true;	
-			
-			Destroy(objToHold.rigidbody);
-			Destroy(hit.rigidbody);
-			
-			
-			for (var i : int = 0; i < objToHold.transform.FindChild("snapPoints").childCount; i ++)
-			{
-				objToHold.transform.FindChild("snapPoints").GetChild(i).gameObject.layer = 0;					
-			}			
-				
-			setLayer(objToHold, 0);
-			emptyPar = GameObject("Frame");
-			emptyPar.gameObject.AddComponent(Rigidbody);
-			
-			hit.transform.parent = emptyPar.transform;			
-			objToHold.transform.parent = emptyPar.transform;
-			objToHold = null;
-		}
-		else 
-		{
-			clone.transform.parent = null;		
-			GameObject.Destroy(clone);
-			objToHold.transform.parent = null;
-			objToHold.transform.position = clone.transform.position;
-			objToHold.transform.rotation = clone.transform.rotation;
-			//objToHold.rigidbody.constraints = RigidbodyConstraints.None;				
-			canPlace = false;
-			canSpawn = true;
-			handsFull = false;
-			objToHold.layer = 0;
-			Destroy(objToHold.rigidbody);
-			
-			for (var p : int = 0; p < objToHold.transform.FindChild("snapPoints").childCount; p ++){
-				objToHold.transform.FindChild("snapPoints").GetChild(p).gameObject.layer = 0;
-			
-					
-			}
-			objToHold.collider.enabled = true;
-			canProj = true;		
-			setLayer(objToHold, 0);
-			objToHold.transform.parent = emptyPar.transform;
-			objToHold = null;
-		}
-		
-	}
-}
-
-//general Raycast boolean
-function shootRay() : boolean {
+function Update() {
 	var cam : Transform = Camera.main.transform;
-	return Physics.Raycast(cam.position, cam.forward, hit, 10);
-	
+	var mouseLook = GetComponent(MouseLook);
+	if (Input.GetKey(KeyCode.E)) {
+		setMouseLook(false);
+		if (objInHand) {
+			objInHand.rigidbody.angularVelocity = Vector3.zero;
+			var sensitivityX : float = 15.0f;
+ 			var sensitivityY : float = 15.0f;
+ 			var sensitivityOffset : float = 5.0f;
+			var rotationX = Input.GetAxis("Mouse X") * sensitivityX;
+   			var rotationY = Input.GetAxis("Mouse Y") * sensitivityY;
+   			var offset = Input.GetAxis("Mouse ScrollWheel") * sensitivityOffset;
+   			objInHand.RotateAroundLocal( cam.up, -Mathf.Deg2Rad * rotationX );
+   			objInHand.RotateAroundLocal( cam.right, Mathf.Deg2Rad * rotationY );
+   			cj.transform.position += cam.forward * offset;
+		}
+	} else {
+		setMouseLook(true);
+	}
+	if (Input.GetMouseButtonDown(0)) {
+		if (cj && cj.connectedBody) {
+			cj.connectedBody = null;
+		} else {
+			var hit : RaycastHit;
+			if (Physics.Raycast(cam.position, cam.forward, hit, 10)) {
+		    	if (hit.rigidbody) {
+		    		if (!cj)
+					{
+						var go = new GameObject("Rigidbody dragger");
+						go.transform.parent = cam;
+						var body : Rigidbody = go.AddComponent ("Rigidbody") as Rigidbody;
+						cj = go.AddComponent ("CharacterJoint");
+						body.isKinematic = true;
+					}
+					cj.transform.position = hit.point;
+//	    	   	  	sj.anchor = Vector3.zero;
+//			    	sj.damper = 15.0;
+//			    	sj.maxDistance = 0.2;
+			    	cj.connectedBody = hit.rigidbody;
+//			    	sj.spring = 50.0;
+			    	objInHand = hit.transform;
+		    	}
+			}
+		}
+	}
 }
-
-
-// projects the ghost object on the snap point hit by the raycast
-function projectObject()
-{
-	var newClone : GameObject;
-	newClone = GameObject.Instantiate(objToHold);
-	var snapPoints : Transform = newClone.transform.FindChild("snapPoints");
-	var toSnap : GameObject = snapPoints.GetChild(0).gameObject;
-	newClone.transform.rotation = Quaternion.LookRotation(hit.collider.transform.forward,
-														  -hit.collider.transform.up);
-	newClone.transform.position = hit.collider.transform.position - toSnap.transform.position
-								  + 0.5f * toSnap.transform.up;
-	// snap points are rotated 180 degrees around the blue axis
-	newClone.layer = 2;
-	newClone.renderer.material.shader = Shader.Find("Transparent/Diffuse");
-	newClone.renderer.material.color.a = 0.5f;
-	newClone.collider.enabled = false;
-	clone = newClone;
-		
-}
-			
-
