@@ -10,37 +10,6 @@ var canSpawn : boolean = false;
 var emptyPar : GameObject;
 var clone : GameObject; //the "ghost" image before you place
 
-
-/*class Frame extends ScriptableObject {
-	var left : Frame;
-	var right : Frame;
-	var snapPoint : Collider;
-	var transform : Transform;
-	var rigidbody : Rigidbody;
-	function Frame(left : GameObject) {
-		var buddy : GameObject = left;
-		this.left = null;
-		buddy.transform.parent = this.transform;
-		buddy.rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-		this.transform.position = left.transform.position;
-		this.rigidbody.mass = left.rigidbody.mass;
-		this.right = null;
-		this.snapPoint = null;
-	}
-	function Frame(left : Frame, right : Frame, snapPoint : Collider) {
-		this.left = left;
-		this.right = right;
-		this.snapPoint = snapPoint;
-		this.transform.position = (left.transform.position * left.rigidbody.mass
-								   + right.transform.position * right.rigidbody.mass) / 2;
-		this.rigidbody.mass = left.rigidbody.mass + right.rigidbody.mass;
-		this.left.rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-		this.right.rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-		this.left.transform.parent = this.transform;
-		this.right.transform.parent = this.transform;
-	}
-}*/
-
 function Start() {
 	hands = this.transform.FindChild("Hands").gameObject;
 }
@@ -63,7 +32,7 @@ function Update () {
 			Debug.Log("you hit nothing");
 		}						
 	}
-	else if (hit.collider.tag == "snapPoints") {
+	else if (hit != null && hit.collider.tag == "snapPoints") {
 		canPlace = true;
 		if (Input.GetMouseButtonDown(1)) {
 			
