@@ -48,23 +48,25 @@ function Start() {
 function Update () {
 	
 	//if you press "E"
-	var rayhit : boolean = shootRay();
-	if (Input.GetKeyDown(KeyCode.E)){
+	shootRay();
+	if (Input.GetMouseButtonDown(0)){
 		if (handsFull == true){
-			dropObject();
-			return;
-		}
-		if (rayhit) {
-			if (hit.transform.tag == "physTest") {
-				pickUpObject();	
+			if(canPlace == false){
+				dropObject();
+				return;
 			}
-		} else {
+		}
+		if (hit.transform.tag == "physTest") {
+				pickUpObject();	
+		}
+		else {
 			Debug.Log("you hit nothing");
 		}						
 	}
-	if (handsFull && rayhit && hit.collider.tag == "snapPoints") {
-		if (Input.GetMouseButtonDown(0)) {
-			canPlace = true;
+	else if (hit.collider.tag == "snapPoints") {
+		canPlace = true;
+		if (Input.GetMouseButtonDown(1)) {
+			
 			
 			//GameObject.Destroy(clone);
 			placeObject();
@@ -74,7 +76,8 @@ function Update () {
 			GameObject.Destroy(clone);
 			projectObject();
 		}
-	} else if (clone) {
+	} 
+	else{
 		GameObject.Destroy(clone);
 	}
 }
@@ -116,7 +119,7 @@ function placeObject(){
 	
 		if (emptyPar == null)//creates parent if there is none
 		{
-			Debug.Log("poop");
+			
 			clone.transform.parent = null;		
 			GameObject.Destroy(clone);
 			
