@@ -1,13 +1,8 @@
 ﻿#pragma strict
 
-var handsFull : boolean  = false;//checks to see if hands have an object asighed to them
-var objToHold : GameObject; // the object you are goign to be picking up
+var objToHold : GameObject = null; // the object you are goign to be picking up
 var hands : GameObject; // the empty that is your hands 
 var hit : RaycastHit; // raycast hit veriable
-var canProj : boolean = true;//checks to see if you can spawn a "ghost" of what you are holding
-var canPlace : boolean = false;
-var canSpawn : boolean = false;
-var emptyPar : GameObject;
 var clone : GameObject; //the "ghost" image before you place
 
 function Start() {
@@ -15,42 +10,26 @@ function Start() {
 }
 
 function Update () {
-	
-	//if you press "E"
-	shootRay();
-	if (Input.GetMouseButtonDown(0)){
-		if (handsFull == true){
-			if(canPlace == false){
-				dropObject();
-				return;
-			}
+	var didHit : boolean = shootRay();
+	if (Input.GetMouseButtonDown(0)) {
+		if (objToHold != null) {
+			dropObject();
+		} else if (didHit && hit.transform.tag == "physTest") {
+			pickUpObject();	
 		}
-		if (hit.transform.tag == "physTest") {
-				pickUpObject();	
-		}
-		else {
-			Debug.Log("you hit nothing");
-		}						
-	}
-	else if (hit != null && hit.collider.tag == "snapPoints") {
-		canPlace = true;
+	} else if (didHit && hit.collider.tag == "snapPoints" && objToHold != null) {
 		if (Input.GetMouseButtonDown(1)) {
-			
-			
-			//GameObject.Destroy(clone);
 			placeObject();
-			//new Frame(Frame(objToHold), Frame(hit.transform.gameObject), hit.collider);
-			//dropObject();
-		} else {
-			GameObject.Destroy(clone);
+		} else if (clone == null) {
 			projectObject();
 		}
-	} 
-	else{
-		GameObject.Destroy(clone);
+	} else if (clone != null) {
+	        GameObject.Destroy(clone);
+                clone = null;
 	}
 }
-// 
+
+// really basic helper method to change the layer of an object and all its children
 function setLayer(obj : GameObject, layer : int) {
 	obj.layer = layer;	
 	for (var child : Transform in obj.transform.FindChild("snapPoints").transform){
@@ -58,102 +37,57 @@ function setLayer(obj : GameObject, layer : int) {
 	}
 }
 
-//function to pick things up
+// function to pick things up
 function pickUpObject(){
 	objToHold = hit.transform.gameObject;				
 	objToHold.transform.parent = hands.transform;
 	objToHold.transform.rotation = hands.transform.rotation;
 	objToHold.transform.position = hands.transform.position;
 	objToHold.collider.enabled = false;
-	handsFull = true;	
 	objToHold.rigidbody.constraints = RigidbodyConstraints.FreezeAll;
 	setLayer(objToHold, 2);
 }
-//function to drop things
+
+// function to drop things
 function dropObject(){
 	objToHold.transform.parent = null;
 	objToHold.rigidbody.constraints = RigidbodyConstraints.None;
 	objToHold.collider.enabled = true;
-	canProj = true;
-	handsFull = false;
 	setLayer(objToHold, 0);
 	objToHold = null;
 }
 
-
 function placeObject(){
+        if (hit.collider.transform.parent == null) {
+            var par : GameObject = GameObject("Frame");
+            par.AddComponent(Rigidbody);
+            hit.collider.transform.parent = par.transform;
+        }
+        
+        // set the transform parent
+        objToHold.transform.parent = hit.collider.transform.parent;
+
+        // move the object into place
+        objToHold.transform.position = clone.transform.position;
+        objToHold.transform.rotation = clone.transform.rotation;
 	
-	if (canPlace == true)
-	{
-	
-		if (emptyPar == null)//creates parent if there is none
-		{
-			
-			clone.transform.parent = null;		
-			GameObject.Destroy(clone);
-			
-			objToHold.transform.parent = null;
-			objToHold.transform.position = clone.transform.position;
-			objToHold.transform.rotation = clone.transform.rotation;
-			objToHold.layer = 0;
-			objToHold.collider.enabled = true;
-						
-			canPlace = false;
-			canSpawn = true;
-			handsFull = false;
-			canProj = true;	
-			
-			Destroy(objToHold.rigidbody);
-			Destroy(hit.rigidbody);
-			
-			
-			for (var i : int = 0; i < objToHold.transform.FindChild("snapPoints").childCount; i ++)
-			{
-				objToHold.transform.FindChild("snapPoints").GetChild(i).gameObject.layer = 0;					
-			}			
-				
-			setLayer(objToHold, 0);
-			emptyPar = GameObject("Frame");
-			emptyPar.gameObject.AddComponent(Rigidbody);
-			
-			hit.transform.parent = emptyPar.transform;			
-			objToHold.transform.parent = emptyPar.transform;
-			objToHold = null;
-		}
-		else 
-		{
-			clone.transform.parent = null;		
-			GameObject.Destroy(clone);
-			objToHold.transform.parent = null;
-			objToHold.transform.position = clone.transform.position;
-			objToHold.transform.rotation = clone.transform.rotation;
-			//objToHold.rigidbody.constraints = RigidbodyConstraints.None;				
-			canPlace = false;
-			canSpawn = true;
-			handsFull = false;
-			objToHold.layer = 0;
-			Destroy(objToHold.rigidbody);
-			
-			for (var p : int = 0; p < objToHold.transform.FindChild("snapPoints").childCount; p ++){
-				objToHold.transform.FindChild("snapPoints").GetChild(p).gameObject.layer = 0;
-			
-					
-			}
-			objToHold.collider.enabled = true;
-			canProj = true;		
-			setLayer(objToHold, 0);
-			objToHold.transform.parent = emptyPar.transform;
-			objToHold = null;
-		}
-		
-	}
+        // make sure the physics work
+        objToHold.collider.enabled = true;
+        Destroy(objToHold.rigidbody);
+        setLayer(objToHold, 0);
+
+        // remove the phantom object
+        GameObject.Destroy(clone);
+        clone = null;
+
+        // clean up references
+        objToHold = null;
 }
 
 //general Raycast boolean
 function shootRay() : boolean {
 	var cam : Transform = Camera.main.transform;
-	return Physics.Raycast(cam.position, cam.forward, hit, 10);
-	
+	return Physics.Raycast(cam.position, cam.forward, hit, 10);	
 }
 
 
@@ -174,7 +108,6 @@ function projectObject()
 	newClone.renderer.material.color.a = 0.5f;
 	newClone.collider.enabled = false;
 	clone = newClone;
-		
 }
 			
 
