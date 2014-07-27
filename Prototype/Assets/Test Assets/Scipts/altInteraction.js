@@ -11,12 +11,6 @@ function Start () {
 
 function Update () {
 	shootRay();	
-	if (Input.GetKey(KeyCode.E)){
-		addForce.isOn = true;
-	}
-	else{
-		addForce.isOn = false;
-	}
 	if (Input.GetKeyDown(KeyCode.H)){
 		forceRocket.isOnR = true;
 	}
