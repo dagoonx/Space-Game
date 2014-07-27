@@ -17,20 +17,20 @@ function Update () {
 			} else {
 				maxStr = 0;
 			}
-        	rigidbody.AddForceAtPosition(Vector3.up * maxStr, tp.position);
+        	rigidbody.AddForceAtPosition(Vector3.up * maxStr * Time.deltaTime * 725, tp.position);
         }
     }
     if (Input.GetKey(KeyCode.W)){			
-		rigidbody.AddRelativeForce(Vector3.forward * 30);		
+		rigidbody.AddRelativeForce(Vector3.forward * 30 * Time.deltaTime * 725);		
 	}
 	if (Input.GetKey(KeyCode.S)){		
-		rigidbody.AddRelativeForce(Vector3.back * 30);
+		rigidbody.AddRelativeForce(Vector3.back * 30 * Time.deltaTime * 725);
 	}
     if (Input.GetKey(KeyCode.D)){			
-		rigidbody.AddRelativeTorque (Vector3.up * 5);		
+		rigidbody.AddRelativeTorque (Vector3.up * 5 * Time.deltaTime * 725);		
 	}
 	if (Input.GetKey(KeyCode.A)){		
-		rigidbody.AddRelativeTorque (Vector3.up * -5);
+		rigidbody.AddRelativeTorque (Vector3.up * -5 * Time.deltaTime * 725);
 		
 	} 
 }
