@@ -716,7 +716,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1916836131}
-  m_RootOrder: 4
+  m_RootOrder: 0
 --- !u!114 &577492634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1427,7 +1427,7 @@ Transform:
   m_Children:
   - {fileID: 1113437919}
   m_Father: {fileID: 1916836131}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!65 &1168727013
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1776,7 +1776,7 @@ Transform:
   m_Children:
   - {fileID: 1407611224}
   m_Father: {fileID: 1916836131}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!65 &1340436643
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2428,6 +2428,7 @@ GameObject:
   - 65: {fileID: 1916836136}
   - 54: {fileID: 1916836135}
   - 114: {fileID: 1916836137}
+  - 114: {fileID: 1916836138}
   m_Layer: 0
   m_Name: testPlatform
   m_TagString: Untagged
@@ -2445,11 +2446,11 @@ Transform:
   m_LocalPosition: {x: 3.45888495, y: 4.25540638, z: 2.38418579e-07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 577492633}
   - {fileID: 2112808195}
   - {fileID: 2084595253}
   - {fileID: 1340436641}
   - {fileID: 1168727011}
-  - {fileID: 577492633}
   m_Father: {fileID: 0}
   m_RootOrder: 4
 --- !u!95 &1916836132
@@ -2536,6 +2537,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxStr: 0
   curDis: 0
+--- !u!114 &1916836138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1916836130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41aec7b16fade4318b24a9adfd1f81f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rate: 20
+  fuel: 100
 --- !u!1 &1940940301
 GameObject:
   m_ObjectHideFlags: 0
@@ -2872,7 +2886,7 @@ Transform:
   m_Children:
   - {fileID: 863565924}
   m_Father: {fileID: 1916836131}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!1 &2112808194
 GameObject:
   m_ObjectHideFlags: 0
@@ -2904,7 +2918,7 @@ Transform:
   m_Children:
   - {fileID: 1785588536}
   m_Father: {fileID: 1916836131}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!65 &2112808197
 BoxCollider:
   m_ObjectHideFlags: 0

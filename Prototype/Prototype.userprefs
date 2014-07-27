@@ -1,8 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Test Assets\Scipts\Interaction.js">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Test Assets/Scipts/altInteraction.js">
     <Files>
-      <File FileName="Assets\Test Assets\Scipts\Interaction.js" Line="211" Column="1" />
+      <File FileName="Assets/Test Assets/Scipts/addForce.js" Line="2" Column="1" />
+      <File FileName="Assets/Test Assets/Scipts/Fuel.js" Line="12" Column="14" />
+      <File FileName="Assets/Test Assets/Scipts/altInteraction.js" Line="13" Column="14" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
