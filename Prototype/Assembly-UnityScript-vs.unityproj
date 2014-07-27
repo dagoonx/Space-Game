@@ -50,7 +50,6 @@
      <Compile Include="Assets\Sample Assets\Utility\TimedObjectDestructor.js" />
      <Compile Include="Assets\Test Assets\Scipts\Interaction.js" />
      <Compile Include="Assets\Test Assets\Scipts\addForce.js" />
-     <Compile Include="Assets\Test Assets\Scipts\altInteraction.js" />
      <Compile Include="Assets\Test Assets\Scipts\butt.js" />
      <Compile Include="Assets\Test Assets\Scipts\forceRocket.js" />
      <Compile Include="Assets\Test Assets\Scipts\mouseLock.js" />
